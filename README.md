@@ -28,6 +28,9 @@ cancellation, and `2` for invalid arguments, configuration, or input. Output is
 terminated by a newline. `--index` outputs the selected row's original
 zero-based index and requires stdin choices.
 
+> For those wondering, yes this is project is written by AI.
+> No, I don't give a f#ck
+
 ## Install
 
 Build, run, or install directly with Nix:
