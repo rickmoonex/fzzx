@@ -1,9 +1,10 @@
 # fzzx
 
-`fzzx` is a small, scriptable fuzzy picker for macOS. It reads newline-separated
-choices from stdin, opens a native AppKit menu, and writes the selected choice to
-stdout. The UI is deliberately dmenu-like: one square, borderless rectangle with
-no title bar, rounded launcher card, shadow, animation, or decorative effects.
+`fzzx` (pronounced like *physics*, because I say so) is a small, scriptable fuzzy
+picker for macOS. It reads newline-separated choices from stdin, opens a native
+AppKit menu, and writes the selected choice to stdout. The UI is deliberately
+dmenu-like: one square, borderless rectangle with no title bar, rounded launcher
+card, shadow, animation, or decorative effects.
 
 ```sh
 printf 'Safari\nFirefox\nSystem Settings\n' |
@@ -28,8 +29,8 @@ cancellation, and `2` for invalid arguments, configuration, or input. Output is
 terminated by a newline. `--index` outputs the selected row's original
 zero-based index and requires stdin choices.
 
-> For those wondering, yes this is project is written by AI.
-> No, I don't give a f#ck
+> For those wondering: yes, this project was written by AI.
+> No, I don't give a f#ck.
 
 ## Install
 
@@ -71,27 +72,61 @@ install -m 755 fzzx "$HOME/.local/bin/fzzx"
 Make sure `$HOME/.local/bin` is on `PATH`. The archives also contain the README,
 license, and changelog.
 
-The flake supports `aarch64-darwin` and `x86_64-darwin`. To consume it from
-another flake:
+The flake supports `aarch64-darwin` and `x86_64-darwin`. It exposes both a
+nix-darwin module for system-wide installation and a Home Manager module for
+installation and configuration.
+
+Add the input:
 
 ```nix
 {
-  inputs.fzzx.url = "github:OWNER/fzzx";
+  inputs.fzzx.url = "github:rickmoonex/fzzx";
 }
 ```
 
-Then, in a nix-darwin module:
+Import the nix-darwin module to install fzzx system-wide:
 
 ```nix
-{ inputs, pkgs, ... }:
+{ inputs, ... }:
 {
-  environment.systemPackages = [
-    inputs.fzzx.packages.${pkgs.stdenv.hostPlatform.system}.default
-  ];
+  imports = [ inputs.fzzx.darwinModules.default ];
+  programs.fzzx.enable = true;
 }
 ```
 
-Or replace `environment.systemPackages` with `home.packages` in Home Manager.
+Import the Home Manager module to install fzzx and generate
+`~/.config/fzzx/fzzx.ini`:
+
+```nix
+{ inputs, ... }:
+{
+  imports = [ inputs.fzzx.homeManagerModules.default ];
+
+  programs.fzzx = {
+    enable = true;
+    settings = {
+      main = {
+        font = "JetBrainsMono Nerd Font Mono:size=16";
+        prompt = "Choose:";
+        lines = 8;
+        width = 640;
+      };
+      colors = {
+        background = "1f1b17f5";
+        text = "d6d1c9ff";
+        prompt = "1f1b17ff";
+        prompt-background = "a39c94ff";
+        selection = "bdb5adff";
+        selection-text = "1f1b17ff";
+        match = "f5bd6bff";
+      };
+    };
+  };
+}
+```
+
+When nix-darwin already installs the package, set
+`programs.fzzx.package = null` in Home Manager to manage only the config file.
 
 For local development:
 
