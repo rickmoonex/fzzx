@@ -176,6 +176,10 @@ Apple Silicon and Intel archives with SHA-256 checksums. This project is not
 published to crates.io. After both archives are uploaded, the workflow updates
 `Formula/fzzx.rb` on `main` with the released version and checksums.
 
+The release job checks every push to `main`, but git-only version detection
+creates a release only when `Cargo.toml` is newer than the latest `v*` tag. The
+release-PR job runs after that check, avoiding races during the first release.
+
 Use conventional commit prefixes such as `fix:`, `feat:`, and `feat!:` so
 release-plz can determine patch, minor, and major version bumps.
 

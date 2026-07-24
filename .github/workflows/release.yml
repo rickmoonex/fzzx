@@ -36,8 +36,17 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
+      - name: Show release result
+        env:
+          RELEASES_CREATED: ${{ steps.release-plz.outputs.releases_created }}
+          RELEASES: ${{ steps.release-plz.outputs.releases }}
+        run: |
+          echo "releases_created=$RELEASES_CREATED"
+          echo "releases=$RELEASES"
+
   release-pr:
     name: Prepare release PR
+    needs: release
     runs-on: ubuntu-latest
     permissions:
       contents: write
