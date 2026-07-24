@@ -173,8 +173,9 @@ build. On `main`, release-plz maintains a release PR from conventional commits.
 Merging that PR bumps `Cargo.toml` and `Cargo.lock`, updates `CHANGELOG.md`, tags
 the commit, publishes the changelog as a GitHub release, and attaches native
 Apple Silicon and Intel archives with SHA-256 checksums. This project is not
-published to crates.io. After both archives are uploaded, the workflow updates
-`Formula/fzzx.rb` on `main` with the released version and checksums.
+published to crates.io because release-plz is configured for git-only releases.
+After both archives are uploaded, the workflow updates `Formula/fzzx.rb` on
+`main` with the released version and checksums.
 
 The release job checks every push to `main`, but git-only version detection
 creates a release only when `Cargo.toml` is newer than the latest `v*` tag. The
