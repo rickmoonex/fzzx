@@ -4,6 +4,7 @@ version = "0.1.0"
 edition = "2024"
 description = "A small, scriptable fuzzy picker for macOS"
 license = "MIT"
+repository = "https://github.com/rickmoonex/fzzx"
 
 [dependencies]
 lexopt = "0.3.1"

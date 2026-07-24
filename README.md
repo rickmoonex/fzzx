@@ -4,10 +4,9 @@
 choices from stdin, opens a native AppKit menu, and writes the selected choice to
 stdout. The UI is deliberately dmenu-like: one square, borderless rectangle with
 no title bar, rounded launcher card, shadow, animation, or decorative effects.
-Installed Nerd Fonts work like any other macOS font.
 
 ```sh
-printf '󰀻 Safari\n󰈹 Firefox\n󰒓 System Settings\n' |
+printf 'Safari\nFirefox\nSystem Settings\n' |
   fzzx --font 'JetBrainsMono Nerd Font Mono:size=16'
 ```
 
@@ -170,6 +169,8 @@ Run `fzzx --help` for the complete CLI.
 
 Pull requests run formatting, tests, Clippy, Nix evaluation, and a Nix package
 build. On `main`, release-plz maintains a release PR from conventional commits.
+All workflow jobs run on native GitHub-hosted macOS runners because fzzx is a
+Darwin-only crate and release-plz verifies packaged code while preparing a PR.
 Merging that PR bumps `Cargo.toml` and `Cargo.lock`, updates `CHANGELOG.md`, tags
 the commit, publishes the changelog as a GitHub release, and attaches native
 Apple Silicon and Intel archives with SHA-256 checksums. This project is not

@@ -11,7 +11,7 @@ permissions:
 jobs:
   release:
     name: Release
-    runs-on: ubuntu-latest
+    runs-on: macos-15
     permissions:
       contents: write
       pull-requests: read
@@ -48,7 +48,7 @@ jobs:
     name: Prepare release PR
     needs: release
     if: needs.release.outputs.created != 'true'
-    runs-on: ubuntu-latest
+    runs-on: macos-15
     permissions:
       contents: write
       pull-requests: write
@@ -115,7 +115,7 @@ jobs:
     name: Update Homebrew formula
     needs: [release, artifacts]
     if: needs.release.outputs.created == 'true'
-    runs-on: ubuntu-latest
+    runs-on: macos-15
     permissions:
       contents: write
     steps:
