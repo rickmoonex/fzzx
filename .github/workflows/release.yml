@@ -47,6 +47,7 @@ jobs:
   release-pr:
     name: Prepare release PR
     needs: release
+    if: needs.release.outputs.created != 'true'
     runs-on: ubuntu-latest
     permissions:
       contents: write
