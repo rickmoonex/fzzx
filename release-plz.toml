@@ -1,0 +1,13 @@
+[workspace]
+changelog_update = true
+git_release_enable = true
+git_tag_enable = true
+git_only = true
+release_always = false
+semver_check = false
+
+[[package]]
+name = "fzzx"
+changelog_path = "CHANGELOG.md"
+git_tag_name = "v{{ version }}"
+publish = false

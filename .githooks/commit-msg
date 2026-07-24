@@ -1,0 +1,26 @@
+#!/bin/sh
+
+message=$(sed -n '1p' "$1")
+
+case "$message" in
+  "Merge "*|"Revert "*|fixup\!*|squash\!*) exit 0 ;;
+esac
+
+if printf '%s\n' "$message" | grep -Eq '^(build|chore|ci|docs|feat|fix|perf|refactor|revert|style|test)(\([[:alnum:]_.-]+\))?!?: .+'; then
+  exit 0
+fi
+
+cat >&2 <<'EOF'
+Commit message must use Conventional Commits:
+
+  type(optional-scope): description
+
+Examples:
+  feat: add application launcher mode
+  fix(ui): correct result list height
+  feat!: change the output format
+
+Allowed types: build, chore, ci, docs, feat, fix, perf, refactor, revert, style, test
+EOF
+
+exit 1

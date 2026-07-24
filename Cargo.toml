@@ -1,0 +1,54 @@
+[package]
+name = "fzzx"
+version = "0.1.0"
+edition = "2024"
+description = "A small, scriptable fuzzy picker for macOS"
+license = "MIT"
+publish = false
+
+[dependencies]
+lexopt = "0.3.1"
+nucleo-matcher = "0.3.1"
+objc2 = "0.6.4"
+objc2-foundation = { version = "0.3.2", default-features = false, features = [
+  "NSArray",
+  "NSAttributedString",
+  "NSDictionary",
+  "NSGeometry",
+  "NSIndexSet",
+  "NSNotification",
+  "NSObject",
+  "NSRange",
+  "NSString",
+  "NSThread",
+  "std",
+] }
+objc2-app-kit = { version = "0.3.2", default-features = false, features = [
+  "NSApplication",
+  "NSAttributedString",
+  "NSColor",
+  "NSClipView",
+  "NSControl",
+  "NSEvent",
+  "NSFont",
+  "NSFontDescriptor",
+  "NSFontManager",
+  "NSGraphics",
+  "NSPanel",
+  "NSMenu",
+  "NSMenuItem",
+  "NSResponder",
+  "NSRunningApplication",
+  "NSScreen",
+  "NSScrollView",
+  "NSTableColumn",
+  "NSTableHeaderView",
+  "NSTableView",
+  "NSText",
+  "NSTextField",
+  "NSTextView",
+  "NSView",
+  "NSWindow",
+  "std",
+  "objc2-core-foundation",
+] }
